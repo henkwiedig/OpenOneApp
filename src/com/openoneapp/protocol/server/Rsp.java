@@ -1,7 +1,11 @@
 package com.openoneapp.protocol.server;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import com.openoneapp.protocol.client.Dat;
@@ -21,6 +25,9 @@ public class Rsp {
 	
 	@Element(name="Dat",required = false)
 	private Dat dat;
+	
+	@ElementList(name="UrlList",required = false)
+	private ArrayList<Match> matches;
 	
 	public Challenge getChallenge() {
 		return challenge;
@@ -53,7 +60,13 @@ public class Rsp {
 	public void setDat(Dat dat) {
 		this.dat = dat;
 	}
-	
-	
+
+	public ArrayList<Match> getMatches() {
+		return matches;
+	}
+
+	public void setMatches(ArrayList<Match> matches) {
+		this.matches = matches;
+	}	
 
 }

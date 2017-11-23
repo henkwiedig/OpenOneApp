@@ -46,6 +46,15 @@ public class Req {
 	public void setSubscribe(Subscribe subscribe) {
 		this.subscribe = subscribe;
 	}
+	
+	public Dir getDir() {
+		return dir;
+	}
+
+	public void setDir(Dir dir) {
+		this.dir = dir;
+	}
+
 
 	@Attribute
 	private int id;
@@ -61,5 +70,8 @@ public class Req {
 	
 	@Element(name="Subscribe",required=false)
 	private Subscribe subscribe;
+	
+	@Element(name="Dir",required=false)
+	private Dir dir;
 
 }
