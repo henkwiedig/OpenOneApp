@@ -1,6 +1,6 @@
 package com.openoneapp;
 
-public class main {
+public class Client {
 	
 	
 	public static void main(String[] args) {

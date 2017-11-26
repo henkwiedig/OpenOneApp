@@ -114,7 +114,6 @@ public class MIB {
 			serializer.write(dat,System.out);
 			System.out.println("\n------------\n");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

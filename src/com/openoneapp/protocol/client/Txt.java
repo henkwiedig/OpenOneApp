@@ -21,11 +21,24 @@ public class Txt {
 	public void setVal(String val) {
 		this.val = val;
 	}
+	
+	
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 
 	@Attribute
 	private String name;
 	
-	@Attribute
+	@Attribute(required=false)
 	private String val;
+	
+	@Attribute(required=false)
+	private String state;
 
 }
