@@ -1,0 +1,1 @@
+<ServiceBeacon id="DGTx0NBHjv5MRWviWb8Z4bURaVYNaXmQ" address="socket://localhost:25010" service="VW SAI-Server HIGH" status="active" description="Dies ist der VW Standard Application Interface Server. API Level 5" version="5.0" envelope="pretty"/>
