@@ -8,7 +8,7 @@ public class Server {
 	public static void main(String[] args) {
 		
 		try {
-			Thread sb = new Thread( new ServiceBeacon() );
+			Thread sb = new Thread( new ServiceBeaconSender() );
 			sb.start();
 			
 			Thread server = new Thread( new ServerListener() );

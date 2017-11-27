@@ -14,6 +14,7 @@ import javax.swing.Action;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import javax.swing.JLabel;
 
 public class OpenOneApp {
 
@@ -23,6 +24,8 @@ public class OpenOneApp {
 	
 	private MIB mib;
 	private JButton btnDisconnect;
+	private JButton btnDiscover;
+	private JLabel lblIp;
 	
 	/**
 	 * Launch the application.
@@ -58,19 +61,10 @@ public class OpenOneApp {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel panel = new JPanel();
-		panel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				try {
-					mib.car.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		tabbedPane.addTab("Setup", null, panel, null);
+		JPanel setup_panel = new JPanel();
+		JPanel data_panel = new JPanel();
+		tabbedPane.addTab("Setup", null, setup_panel, null);
+		tabbedPane.addTab("Data", null, data_panel, null);
 		
 		btnConnect = new JButton("Connect");
 		btnConnect.addMouseListener(new MouseAdapter() {
@@ -82,10 +76,38 @@ public class OpenOneApp {
 				 read.start();
 			}
 		});
-		panel.add(btnConnect);
+		
+		btnDiscover = new JButton("Discover");
+		btnDiscover.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("Discover");
+				 ServiceBeaconListener sb = new ServiceBeaconListener();
+				 System.out.println(sb.getBeacon());
+				 lblIp.setText(sb.getBeacon().split("/")[3].split(":")[0]);
+				 
+			}
+		});
+		setup_panel.add(btnDiscover);
+		setup_panel.add(btnConnect);
 		
 		btnDisconnect = new JButton("Disconnect");
-		panel.add(btnDisconnect);
+		btnDisconnect.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					mib.car.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		setup_panel.add(btnDisconnect);
+		
+		lblIp = new JLabel("Ip");
+		setup_panel.add(lblIp);
 	}
 
 }

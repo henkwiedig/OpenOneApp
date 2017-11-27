@@ -9,7 +9,7 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
-public class ServiceBeacon implements Runnable {
+public class ServiceBeaconSender implements Runnable {
 	
 	private boolean Running;
 

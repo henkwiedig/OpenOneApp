@@ -1,0 +1,12 @@
+<Status>
+  <Init/>
+</Status>
+<Rsp id="1">
+  <Capabilities description="Dies ist der VW Standard Application Interface Server. API Level 5" service="VW SAI-Server HIGH" version="5.0" id="DGTx0NBHjv5MRWviWb8Z4bURaVYNaXmQ">
+    <Supports protocol="1.3" interface="true" authenticate="true" heartbeat="true" datTimeStamp="true"/>
+  </Capabilities>
+</Rsp>
+<Rsp id="2">
+  <Challenge nonce="bO8jMejEMK4IfSnKorf04A=="/>
+</Rsp>
+<Rsp id="3"/>
