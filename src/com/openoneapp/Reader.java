@@ -18,7 +18,9 @@ public class Reader implements Runnable {
 	public void run() {
 	    try {
 			String data = new String();
-			while((data += mib.br.readLine()) != null) {
+			String line;
+			while((line = mib.br.readLine()) != null) {
+				data += line;
 				System.out.println("Read from network: " + data);
 				if ( data.matches(".*</Status>.*")){
 					mib.handleStatusMessage(data);
