@@ -173,6 +173,7 @@ public class MIB {
 			serializer.write(req,car.getOutputStream());
 			serializer.write(req,System.out);
 			System.out.println("\n------------\n");
+			this.removeDatfromList(url);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -180,6 +181,15 @@ public class MIB {
 		
 	}
 	
+	private void removeDatfromList(String url) {
+		for (int x=0; x<data.size(); x++) {
+			if (data.get(x).getUrl().matches(url)) {
+				System.out.println("Remove "+ url);
+				data.remove(x);
+			}
+		}		
+	}
+
 	public void getURLList(String pattern) {
 		
 		try {

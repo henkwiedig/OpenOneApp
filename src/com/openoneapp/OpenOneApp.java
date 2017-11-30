@@ -68,9 +68,10 @@ public class OpenOneApp {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 800, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new GridLayout(3, 1, 0, 0));
 		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.NORTH);
+		frame.getContentPane().add(panel);
 		
 		JLabel lblIp = new JLabel("IP");
 		panel.add(lblIp);
@@ -143,11 +144,10 @@ public class OpenOneApp {
 		panel.add(btnClose);
 		
 		panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		frame.getContentPane().add(panel_1);
 		
 		final JPanel panel_2 = new JPanel();
-		frame.getContentPane().add(panel_2, BorderLayout.SOUTH);		
+		frame.getContentPane().add(panel_2);		
 		
 		
 		
