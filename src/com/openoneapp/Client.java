@@ -7,7 +7,7 @@ public class Client {
 		
 		try {
 			
-			MIB mib = new MIB();
+			MIB mib = new MIB("localhost", 25010);
 			
 			Thread read = new Thread( new Reader(mib) );
 			read.start();

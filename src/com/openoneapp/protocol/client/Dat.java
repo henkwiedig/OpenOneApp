@@ -36,5 +36,15 @@ public class Dat {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+	public List<Object> getData() {
+		return data;
+	}
+
+	public void setData(List<Object> data) {
+		this.data = data;
+	}
+	
+	
 	
 }

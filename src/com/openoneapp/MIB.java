@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.security.MessageDigest;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Random;
@@ -19,6 +20,7 @@ import com.openoneapp.protocol.client.Dir;
 import com.openoneapp.protocol.client.Protocol;
 import com.openoneapp.protocol.client.Req;
 import com.openoneapp.protocol.client.Subscribe;
+import com.openoneapp.protocol.client.Unsubscribe;
 import com.openoneapp.protocol.server.Match;
 import com.openoneapp.protocol.server.Rsp;
 
@@ -30,14 +32,16 @@ public class MIB {
 	private Persister persister = new Persister(new AnnotationStrategy());
 	private Serializer serializer = persister;
 	private int requestCounter = 1;
+	public ArrayList<Dat> data = new ArrayList<Dat>();
+	public Rsp services;
 	public Socket car;
 	public BufferedReader br;	
 	
-	public MIB () {
+	public MIB (String host, int port) {
 		
 		try {
 			//car = new Socket("10.173.189.1", 25010);
-			car = new Socket("localhost", 25010);
+			car = new Socket(host, port);
 			br = new BufferedReader(new InputStreamReader(car.getInputStream()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -97,9 +101,12 @@ public class MIB {
 		
 		ArrayList<Match> matches = rsp.getMatches();
 		
+		//store for later use
+		services = rsp;
 		for (int x=0; x<matches.size(); x++) {
 			Match m = matches.get(x);
-			this.subscribeToUrl(m.getUrl());			
+			System.out.println(m.getUrl());
+			//this.subscribeToUrl(m.getUrl());			
 		}
 
 		
@@ -113,12 +120,28 @@ public class MIB {
 			System.out.print("Answer: ");
 			serializer.write(dat,System.out);
 			System.out.println("\n------------\n");
+			this.upsetDat(dat);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
+	private void upsetDat(Dat dat) {
+		boolean updated = false;
+		for (int x=0; x<data.size(); x++) {
+			if (data.get(x).getUrl().matches(dat.getUrl())) {
+				System.out.println("Doing upsert for "+ dat.getUrl());
+				data.set(x, dat);
+				updated = true;
+			}
+		}
+		if (! updated) {
+			System.out.println("Doing insert for "+ dat.getUrl());
+			data.add(dat);
+		}
+	}
+
 	public void subscribeToUrl(String url){
 		
 		try {
@@ -127,6 +150,25 @@ public class MIB {
 			Subscribe subscribe = new Subscribe();
 			subscribe.setUrl(url);
 			req.setSubscribe(subscribe);			
+			System.out.print("Sending: ");
+			serializer.write(req,car.getOutputStream());
+			serializer.write(req,System.out);
+			System.out.println("\n------------\n");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void unSubscribeToUrl(String url){
+		
+		try {
+			Req req = new Req();
+			req.setId(requestCounter++);			
+			Unsubscribe unsubscribe = new Unsubscribe();
+			unsubscribe.setUrl(url);
+			req.setUnsubscribe(unsubscribe);			
 			System.out.print("Sending: ");
 			serializer.write(req,car.getOutputStream());
 			serializer.write(req,System.out);

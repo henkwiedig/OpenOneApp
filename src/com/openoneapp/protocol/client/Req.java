@@ -47,6 +47,15 @@ public class Req {
 		this.subscribe = subscribe;
 	}
 	
+
+	public Unsubscribe getUnsubscribe() {
+		return unsubscribe;
+	}
+
+	public void setUnsubscribe(Unsubscribe unsubscribe) {
+		this.unsubscribe = unsubscribe;
+	}
+
 	public Dir getDir() {
 		return dir;
 	}
@@ -54,7 +63,6 @@ public class Req {
 	public void setDir(Dir dir) {
 		this.dir = dir;
 	}
-
 
 	@Attribute
 	private int id;
@@ -70,6 +78,9 @@ public class Req {
 	
 	@Element(name="Subscribe",required=false)
 	private Subscribe subscribe;
+	
+	@Element(name="Unsubscribe",required=false)
+	private Unsubscribe unsubscribe;
 	
 	@Element(name="Dir",required=false)
 	private Dir dir;
